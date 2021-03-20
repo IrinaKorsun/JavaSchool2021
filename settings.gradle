@@ -1,2 +1,3 @@
-include ':Task_1'
+include 'Task_1'
+include 'Task_2'
 
