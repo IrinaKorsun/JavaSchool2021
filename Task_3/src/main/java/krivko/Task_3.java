@@ -3,11 +3,11 @@ package krivko;
 import java.util.Scanner;
 
 /**
- * Задание Task_3
+ * Задание 3
  * Написать консольный калькулятор, умеющий производить базовые вычисления
  * @author krivko
  * @since 22.03.2021
- * @version 1
+ * @version 2
  */
 public class Task_3 {
     public static void main(String... agr ) {
@@ -28,14 +28,14 @@ public class Task_3 {
                     operator = scanner.next();
                     if (scanner.hasNextDouble()) {
                         b = scanner.nextDouble();
-                        switch (operator) {
-                            case "+" -> result = a + b;
-                            case "-" -> result = a - b;
-                            case "*" -> result = a * b;
-                            case "/" -> result = a / b;
-                            case "%" -> result = a % b;
-                            default -> result = 0;
-                        }
+                        result = switch (operator) {
+                            case "+" -> a + b;
+                            case "-" -> a - b;
+                            case "*" -> a * b;
+                            case "/" -> a / b;
+                            case "%" -> a % b;
+                            default -> 0;
+                        };
                         System.out.printf("%.2f %s %.2f = %.2f\n", a, operator, b, result);
                         scanner.nextLine();
                         continue;
