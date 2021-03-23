@@ -5,14 +5,15 @@ import java.util.Scanner;
 /**
  * Задание 3
  * Написать консольный калькулятор, умеющий производить базовые вычисления
+ *
  * @author krivko
- * @since 22.03.2021
  * @version 2
+ * @since 22.03.2021
  */
 public class Task_3 {
-    public static void main(String... agr ) {
+    public static void main(String... agr) {
 
-        double a, b, result;
+        double a, b, result = 0;
         String operator;
         Scanner scanner = new Scanner(System.in);
 
@@ -28,14 +29,15 @@ public class Task_3 {
                     operator = scanner.next();
                     if (scanner.hasNextDouble()) {
                         b = scanner.nextDouble();
-                        result = switch (operator) {
-                            case "+" -> a + b;
-                            case "-" -> a - b;
-                            case "*" -> a * b;
-                            case "/" -> a / b;
-                            case "%" -> a % b;
-                            default -> 0;
-                        };
+//                        result = switch (operator) {
+//                            case "+" -> a + b;
+//                            case "-" -> a - b;
+//                            case "*" -> a * b;
+//                            case "/" -> a / b;
+//                            case "%" -> a % b;
+//                            default -> 0;
+//                        };
+
                         System.out.printf("%.2f %s %.2f = %.2f\n", a, operator, b, result);
                         scanner.nextLine();
                         continue;
