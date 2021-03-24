@@ -1,0 +1,30 @@
+lesnoy/HelloWorld.java
+ lesnoy.HelloWorld
+zatsepin/HelloWorld.java
+ zatsepin.HelloWorld
+pelipenko/HelloWorld.java
+ pelipenko.HelloWorld
+Melnikov/HelloWorld.java
+ Melnikov.HelloWorld
+manafov/HelloWorld.java
+ manafov.HelloWorld
+Shkabrov/HelloWorld.java
+ Shkabrov.HelloWorld
+bogatov/HelloWorld.java
+ bogatov.HelloWorld
+Starikov/HelloWorld.java
+ Starikov.HelloWorld
+krivko/HelloWorld.java
+ krivko.HelloWorld
+Volodin/HelloWorld.java
+ Volodin.HelloWorld
+zhmaylo/HelloWorld.java
+ zhmaylo.HelloWorld
+prikhozhaya/HelloWorld.java
+ prikhozhaya.HelloWorld
+bakunov/HelloWorld.java
+ bakunov.HelloWorld
+kuzmina/HelloWorld.java
+ kuzmina.HelloWorld
+Filippov/HelloWorld.java
+ Filippov.HelloWorld
