@@ -1,0 +1,22 @@
+prikhozhaya/Task2.java
+ prikhozhaya.Task2
+kuzmina/Task2.java
+ kuzmina.Task2
+bakunov/Task2.java
+ bakunov.Task2
+emelyanov/Task2.java
+ emelyanov.Task2
+prikhozhaya/ArrayNum.java
+ prikhozhaya.ArrayNum
+bogatov/Task2.java
+ bogatov.Task2
+Shkabrov/AggregateFunctions.java
+ Shkabrov.AggregateFunctions
+zatsepin/Task2.java
+ zatsepin.Task2
+berezin/ArrayProcessor.java
+ berezin.ArrayProcessor
+pelipenko/Task2.java
+ pelipenko.Task2
+Filippov/Task2.java
+ Filippov.Task2

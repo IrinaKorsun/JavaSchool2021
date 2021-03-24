@@ -26,5 +26,31 @@ bakunov/HelloWorld.java
  bakunov.HelloWorld
 kuzmina/HelloWorld.java
  kuzmina.HelloWorld
+rozhkovnikita/HelloWorld.java
+ rozhkovnikita.HelloWorld
+Khoroshev/HelloWorld.java
+ Khoroshev.HelloWorld
+emelyanov/HelloWorld.java
+ emelyanov.HelloWorld
+Ryzhenko/HelloWorld.java
+ Ryzhenko.HelloWorld
+berezin/HelloWorld.java
+ berezin.HelloWorld
+kuzminam/HelloWorld.java
+ kuzminam.HelloWorld
+Sartakova/HelloWorld.java
+ Sartakova.HelloWorld
+mozzherin/HelloWorld.java
+ mozzherin.HelloWorld
+rozhkovdima/HelloWorld.java
+ rozhkovdima.HelloWorld
+shakina/HelloWorld.java
+ shakina.HelloWorld
+galuza/HelloWorld.java
+ galuza.HelloWorld
+Strashny/HelloWorld.java
+ Strashny.HelloWorld
+shokolova/HelloWorld.java
+ shokolova.HelloWorld
 Filippov/HelloWorld.java
  Filippov.HelloWorld
