@@ -19,6 +19,5 @@ public class Task2 {
             sum += numbers[i];
         }
         System.out.println("Average value in an array : " + String.format("%.2f", sum / numbers.length));
-        System.out.println("Something went wrong!");
     }
 }
