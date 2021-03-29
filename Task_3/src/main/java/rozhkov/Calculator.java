@@ -3,7 +3,7 @@ package rozhkov;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class calculator {
+public class Calculator {
     public static void main(String[] args) {
         double num1;
         double num2;
@@ -28,7 +28,7 @@ public class calculator {
                 return;
         }
         System.out.print("\nРезультат будет следующим:\n");
-        PrintStream printf = System.out.printf(num1 + " " + op + " " + num2 + " = " + ans);
+        System.out.printf(num1 + " " + op + " " + num2 + " = " + ans);
     }
 }
 
