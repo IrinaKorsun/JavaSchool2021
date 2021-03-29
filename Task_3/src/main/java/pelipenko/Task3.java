@@ -47,15 +47,29 @@ public class Task3 {
     }
 
     public static double calc(double first, double second, char operation) {
-        double result = switch (operation) {
-            case '+' -> result = first + second;
-            case '-' -> result = first - second;
-            case '*' -> result = first * second;
-            case '/' -> result = first / second;
-            case '^' -> result = Math.pow(first, second);
-            case '%' -> result = first % second;
-            default -> throw new IllegalStateException("Неизвестная операция: " + operation);
-        };
+        double result;
+        switch (operation) {
+            case '+':
+                result = result = first + second;
+                break;
+            case '-':
+                result = result = first - second;
+                break;
+            case '*':
+                result = result = first * second;
+                break;
+            case '/':
+                result = result = first / second;
+                break;
+            case '^':
+                result = result = Math.pow(first, second);
+                break;
+            case '%':
+                result = result = first % second;
+                break;
+            default:
+                throw new IllegalStateException("Неизвестная операция: " + operation);
+        }
         return result;
     }
 }
