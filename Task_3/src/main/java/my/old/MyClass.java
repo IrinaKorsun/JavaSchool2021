@@ -1,4 +1,4 @@
-package my;
+package my.old;
 
 public class MyClass {
     public int get(String[] array) {

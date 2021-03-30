@@ -1,4 +1,4 @@
-package my;
+package my.old;
 
 public class SecondPart {
     public static void main(String[] args) {

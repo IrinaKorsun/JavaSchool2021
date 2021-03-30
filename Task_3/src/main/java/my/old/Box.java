@@ -1,4 +1,4 @@
-package my;
+package my.old;
 
 public class Box {
     private int length;
