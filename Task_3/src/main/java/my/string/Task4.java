@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 
 public class Task4 {
+//    s
 //    public static void main(String[] args) {
 //        Vector vector1 = new Vector(1, 3, 5);
 //        Vector vector2 = new Vector(2, 4, 6);
