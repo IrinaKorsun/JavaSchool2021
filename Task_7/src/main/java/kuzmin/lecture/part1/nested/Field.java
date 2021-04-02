@@ -4,17 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Field {
-    private final Integer width;
-    private final Integer length;
+    private int width;
+    private int length;
 
     public Field(Integer width, Integer length) {
         this.width = width;
         this.length = length;
 
-        Map<Object, Object> map = new HashMap();
-        map.entrySet();
+        Point point = new Point();
+        point.doSomething();
+        System.out.println("privet");
     }
 
-    public static class Point {
+    public class Point {
+        private void doSomething() {
+            width = width + 1;
+        }
     }
 }
