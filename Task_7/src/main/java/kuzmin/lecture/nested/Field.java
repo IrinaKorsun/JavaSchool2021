@@ -1,7 +1,4 @@
-package kuzmin.lecture.part1.nested;
-
-import java.util.HashMap;
-import java.util.Map;
+package kuzmin.lecture.nested;
 
 public class Field {
     private int width;

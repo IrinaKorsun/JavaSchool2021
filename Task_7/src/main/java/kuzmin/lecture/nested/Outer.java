@@ -1,7 +1,4 @@
-package kuzmin.lecture.part1.nested;
-
-import java.util.ArrayList;
-import java.util.List;
+package kuzmin.lecture.nested;
 
 public class Outer {
     public void outer() {

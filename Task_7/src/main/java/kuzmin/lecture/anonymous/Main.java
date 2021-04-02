@@ -1,4 +1,4 @@
-package kuzmin.lecture.part1.anonymous;
+package kuzmin.lecture.anonymous;
 
 public class Main {
 

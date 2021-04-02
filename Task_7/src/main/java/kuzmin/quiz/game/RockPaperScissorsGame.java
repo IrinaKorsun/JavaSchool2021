@@ -13,7 +13,18 @@ public class RockPaperScissorsGame {
      */
     public Gamer startRound() {
         System.out.println("Start");
-        return gamers[0];
+        for (Gamer gamer : gamers) {
+            Move move = gamer.getMove();
+            if (best(move)) {
+                return gamer;
+            }
+        }
+
+        return null;
+    }
+
+    private boolean best(Move move) {
+        return move == Move.ROCK;
     }
 
     public static void main(String[] args) {
