@@ -1,19 +1,60 @@
 package my;
 
-import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Vector vector1 = new Vector(4, 6, 3);
-        Vector vector2 = new Vector(7, 2, 9);
+    static Scanner s = new Scanner(System.in);
 
-        System.out.println("Длина вектора: " + vector1.getLength());
-        System.out.println("Скалярное произведение: " + vector1.getScalar(vector2));
-        System.out.println("Векторное произведение с другим вектором: " + vector1.getVectorProuct(vector2));
-        System.out.println("Вычисление угла между векторами или косинус угла: " + vector1.getAngel(vector2));
-        System.out.println("Вычисление суммы: " + vector1.getSum(vector2));
-        System.out.println("Вычисление разности: " + vector1.getDifference(vector2));
-        System.out.println("Массив случайных векторов: " + Arrays.toString(Vector.getArrayRandomVectors(2)));
+    public static void main(String[] args) {
+        double a;
+        double b;
+        char operation;
+        double result;
+        System.out.println("Введите числа в виде: a+b/a-b/a*b/a:b ");
+
+        while (s.hasNext()) {
+            if (s.hasNextDouble()) {
+                a = s.nextDouble();
+            } else {
+                printError();
+                continue;
+            }
+            if (s.hasNext("[+-/*/]")) {
+                operation = s.next().charAt(0);
+            } else {
+                printError();
+                continue;
+            }
+            if (s.hasNextDouble()) {
+                b = s.nextDouble();
+            } else {
+                printError();
+                continue;
+            }
+
+            switch (operation) {
+                case '+':
+                    result = a + b;
+                    break;
+                case '-':
+                    result = a - b;
+                    break;
+                case '*':
+                    result = a * b;
+                    break;
+                case '/':
+                    result = a / b;
+                    break;
+                default:
+                    result = 0;
+            }
+            System.out.println("Результат =  " + result);
+        }
+    }
+
+    private static void printError() {
+        System.out.println("Ошибка при вводе!");
+        s.next();
     }
 }
