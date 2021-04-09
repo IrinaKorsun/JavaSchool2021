@@ -27,7 +27,7 @@ class QueueTest {
                 () -> a.enqueue(6)
         );
         //Если очередь переполнена, а пользователь продолжает добавлять элементы, кидаем исключение
-        assertTrue(thrown.getMessage().contains("Очередь переполнена"));
+        assert(thrown.getMessage().contains("Очередь переполнена"));
     }
 
     static Stream<Arguments> listProvider() {
