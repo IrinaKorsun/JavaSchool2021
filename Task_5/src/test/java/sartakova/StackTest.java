@@ -1,84 +1,75 @@
 package sartakova;
 
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class StackTest {
-    private Stack a = new Stack();
-    private List<Object> list = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
-
-    @ParameterizedTest
-    @MethodSource("listProvider")
-    void testQueueFull(List<Object> list) throws Exception {
-        for (Object elem : list) {
-            a.push(elem);
-        }
-        Exception thrown = assertThrows(
-                Exception.class,
-                () -> a.push(11)
-        );
-
-        assertTrue(thrown.getMessage().contains("Ошибка! Стек переполнен"));  //Исключение при переполнении стека
-    }
-
-    static Stream<Arguments> listProvider() {
-        return Stream.of(
-                arguments(Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")),
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
-        );
-    }
+public class StackTest  {
     @Test
-    void testQueueEmpty() throws Exception {
-        for (Object elem : list) {
-            a.push(elem);
-        }
-        assertEquals("a; b; c; d; e; f; g; h; i; j", a.toString());
-        assertEquals("j", a.pop());
-        assertEquals("a; b; c; d; e; f; g; h; i", a.toString());
-        a.push("k");//Добавляем элемент
-        assertEquals("a; b; c; d; e; f; g; h; i; k", a.toString());// Проверка заполнения стека
-        int current_number = a.getCurrent();
-        for (int i = 0; i < current_number; i++) {
-            a.pop(); //Удаление элементов из стека
-        }
-        Exception thrown = assertThrows(
-                Exception.class,
-                () -> a.pop()
-        );
-        assertTrue(thrown.getMessage().contains("Ошибка"));
+    public void testPush() throws Exception {
+        Stack stack = new Stack(10);
+        stack.push('1');
+        stack.push('2');
+        stack.push('3');
+        stack.push('4');
+        stack.push('5');
+        stack.push('6');
+        stack.push('7');
+        stack.push('8');
+        stack.push('9');
+        assertFalse(stack.isEmpty());
+        assertEquals('9', stack.top());
     }
 
     @Test
-    void testEmptyIsMethod() throws Exception {
-        assertTrue(a.isEmpty());
-        a.push(9);
-        assertFalse(a.isEmpty());
+    public void testPop() throws Exception {
+        Stack stack = new Stack(5);
+        stack.push(2);
+        stack.push(3);
+        stack.push(3);
+        stack.push(6);
+        stack.push(8);
+        assertEquals(8, stack.pop());
+        assertEquals(4, stack.getCurrentNumber());
     }
 
     @Test
-    void testToStringMethod() throws Exception {
-        a.push(10);
-        a.push(9);
-        assertEquals("10; 9", a.toString());
+    public void testPopInEmptyStack() {
+        Stack stack = new Stack(3);
+        Assertions.assertThrows(Exception.class,() ->  stack.pop());
     }
 
     @Test
-    void testTopMethod() throws Exception {
-        a.push(1);
-        a.push(2);
-        assertEquals(2, a.top());
-        a.push(22);
-        assertEquals(22, a.top());
+    public void testTopInEmptyStack() {
+        Stack stack = new Stack(10);
+        Assertions.assertThrows(Exception.class, stack::top);
     }
-}
+    @Test
+    public void testIsEmpty() {
+        Stack stack = new Stack(55);
+        assertTrue(stack.isEmpty());
+    }
+
+    @Test
+    public void testTop() throws Exception {
+        Stack stack = new Stack(5);
+        stack.push('a');
+        stack.push('b');
+        stack.push('c');
+        stack.push('d');
+        assertEquals('d', stack.top());
+        assertEquals(4, stack.getCurrentNumber());
+    }
+
+    @Test
+    public void testPushInFullStack() throws Exception {
+        Stack stack = new Stack(4);
+        stack.push('a');
+        stack.push('b');
+        stack.push('c');
+        stack.push('d');
+        Assertions.assertThrows(Exception.class, () -> stack.push('k'));
+    }
+   }

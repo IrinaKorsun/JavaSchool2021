@@ -1,82 +1,70 @@
 package sartakova;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-class QueueTest {
-    private Queue a = new Queue();
-    private List<Object> list = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j");
+class QueueTest  {
 
-    @ParameterizedTest
-    @MethodSource("listProvider")
-    void testQueueIsFull(List<Object> list) throws Exception {
-        for (Object elem : list) {
-            a.enqueue(elem);
-        }
-        Exception thrown = assertThrows(
-                Exception.class,
-                () -> a.enqueue(11)
-        );
-
-        assert(thrown.getMessage().contains("Ошибка! Очередь переполнена"));  //Исключение при переполнении очереди
+    @Test
+    public void testEnqueue() throws Exception {
+        Queue queue = new Queue(5);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        queue.enqueue(5);
+        assertEquals(5, queue.getCurrentNumber());
     }
 
-    static Stream<Arguments> listProvider() {
-        return Stream.of(
-                arguments(Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")),
-                arguments(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
-        );
+
+    @Test
+    public void testDequeue() throws Exception {
+        Queue queue = new Queue(5);
+        queue.enqueue(4);
+        queue.enqueue(1);
+        queue.enqueue(3);
+        queue.enqueue(6);
+        queue.enqueue(8);
+        assertEquals(5, queue.getCurrentNumber());
+        assertEquals(4, queue.dequeue());
+        assertEquals(1, queue.dequeue());
+        assertEquals(3, queue.getCurrentNumber());
     }
 
     @Test
-    void testQueueIsEmpty() throws Exception {
-        for (Object elem : list) {
-            a.enqueue(elem);
-        }
-        assertEquals("a; b; c; d; e; f; g; h; i; j", a.toString());
-        a.dequeue();
-        assertEquals( "b; c; d; e; f; g; h; i; j", a.toString());
-        a.enqueue("k"); //Добавляем в конец очереди
-        assertEquals("b; c; d; e; f; g; h; i; j; k", a.toString());// Проверка заполнения очереди
-        assertEquals("b", a.top()); // Проверка заполнения очереди
-        int current_number = a.getCurrent();
-        for (int i = 0; i < current_number; i++) {
-            a.dequeue(); //Удаление элементов из очереди
-        }
-        Exception thrown = assertThrows(
-                Exception.class,
-                () -> a.dequeue()
-        );
-        assertTrue(thrown.getMessage().contains("Ошибка! Очередь пуста"));
-    }
-    @Test
-    void testEmptyMethod() throws Exception {
-        assertTrue(a.isEmpty());
-        a.enqueue(9);
-        assertFalse(a.isEmpty());
-    }
-    @Test
-    void testTopMethod() throws Exception {
-        a.enqueue(10);
-        a.enqueue(9);
-        assertEquals(10, a.top());
-        a.dequeue();
-        assertEquals(9, a.top());
-        a.enqueue(13);
-        assertEquals(9, a.top());
+    public void testIsEmpty() {
+        Queue queue = new Queue(10);
+        assertTrue(queue.isEmpty());
     }
 
     @Test
-    void testToStringMethod() throws Exception {
-        a.enqueue(10);
-        a.enqueue(9);
-        assertEquals("10; 9", a.toString());
+    public void testGetBegin() throws Exception {
+        Queue queue = new Queue(7);
+        queue.enqueue("k");
+        queue.enqueue("t");
+        queue.enqueue("a");
+        queue.enqueue("b");
+        queue.enqueue("c");
+        queue.enqueue("d");
+        queue.enqueue("e");
+        assertEquals("k", queue.getBegin());
+        assertEquals(7, queue.getCurrentNumber());
     }
+
+    @Test()
+    public void testEnqueueInFullQueue() throws Exception {
+        Queue queue = new Queue(3);
+        queue.enqueue("a");
+        queue.enqueue("b");
+        queue.enqueue("c");
+        Assertions.assertThrows(Exception.class, () -> queue.enqueue("d"));
+        assertEquals(3, queue.getCurrentNumber());
+    }
+
+    @Test
+    public void testDequeueInEmptyQueue() {
+        Queue queue = new Queue(7);
+        Assertions.assertThrows(Exception.class, queue::dequeue);
+    }
+
 }
 
