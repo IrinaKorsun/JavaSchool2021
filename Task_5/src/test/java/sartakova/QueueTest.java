@@ -62,7 +62,7 @@ class QueueTest  {
 
     @Test
     public void testDequeueInEmptyQueue() {
-        Queue queue = new Queue(7);
+        Queue queue = new Queue(8);
         Assertions.assertThrows(Exception.class, queue::dequeue);
     }
 

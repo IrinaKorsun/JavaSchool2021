@@ -13,7 +13,7 @@ public class Stack {
 
     public void push(Object element) throws Exception { // Вставляет новый элемент в стек сверху
         if (current_number == stack.length) {
-            throw new Exception("Ошибка! Стек переполнен");
+            throw new Exception("Ошибка!Стек переполнен");
         }
         stack[++top] = element;
         current_number++;
@@ -22,7 +22,7 @@ public class Stack {
 
     public Object pop() throws Exception { // Возвращает верхний элемент из стека и удаляет его
         if (isEmpty()) {
-            throw new Exception("Ошибка! Стек пустой");
+            throw new Exception("Ошибка!Стек пустой");
         }
         current_number--;
         return stack[top--];

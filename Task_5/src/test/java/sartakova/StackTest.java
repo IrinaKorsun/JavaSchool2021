@@ -48,7 +48,7 @@ public class StackTest  {
     }
     @Test
     public void testIsEmpty() {
-        Stack stack = new Stack(55);
+        Stack stack = new Stack(50);
         assertTrue(stack.isEmpty());
     }
 
