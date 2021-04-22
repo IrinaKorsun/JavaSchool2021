@@ -18,7 +18,7 @@ public class Queue {
 
     public void enqueue(Object element) throws Exception { // Вставляет элемент в конец очереди
         if (current_number == capacity) {
-            throw new Exception("Ошибка!Очередь переполнена");
+            throw new Exception("Ошибка! Очередь переполнена");
         }
         queue[++end] = element;
         current_number++;
@@ -26,7 +26,7 @@ public class Queue {
 
     public Object dequeue() throws Exception { // Удаляет и возвращает первый элемент из очереди, оставшиеся элементы сдвигаются
         if (isEmpty()) {
-            throw new Exception("Ошибка!Очередь пустая");
+            throw new Exception("Ошибка! Очередь пустая");
         }
         Object removedValue = queue[begin];
         current_number--;
