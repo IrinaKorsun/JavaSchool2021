@@ -1,0 +1,9 @@
+package sartakova.factory.beretta;
+
+import sartakova.factory.model.Sliced;
+
+public class BerettaSliced implements Sliced {
+    public BerettaSliced() {
+        System.out.println("Manufacturer Italy  Berettasliced");
+    }
+}
