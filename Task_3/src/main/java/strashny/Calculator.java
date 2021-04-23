@@ -8,7 +8,8 @@ class Calculator {
     /**
      * Флаг завершения программы
      */
-    static boolean flag = true;
+    boolean flag = true;
+    Scanner scanner = new Scanner(System.in);
 
     /**
      * Метод выводит на экран приветствие пользователю
@@ -43,19 +44,16 @@ class Calculator {
             System.out.println("|  Yes / No                              |");
             System.out.println("******************************************");
 
-            Scanner scanner = new Scanner(System.in);
-            switch (scanner.next()) {
+            switch (this.scanner.next()) {
                 case "Y":
                     break;
                 case "y":
                     break;
                 case "N":
                     flag = false;
-                    scanner.close();
                     break;
                 case "n":
                     flag = false;
-                    scanner.close();
                     break;
                 default:
                     System.out.println("Чот не понятно давай еще считать ");
@@ -69,14 +67,13 @@ class Calculator {
      * цифрами переданными в метод
      * @param a первый аргумент для вычисления
      * @param b второй аргумент для вычисления
-     * @param scanner поток для считывания данных
      */
-    private void operationOutRezult(Double a, Double b, Scanner scanner) {
+    private void operationOutRezult(Double a, Double b) {
         boolean flag = true;
         if (this.flag) {
             while (flag) {
                 System.out.println("Выберите операцию (сложение '+', вычитание '-', умножение '*', деление '/')");
-                switch (scanner.next()) {
+                switch (this.scanner.next()) {
                     case "+":
                         System.out.println("Ответ: " + (a + b));
                         flag = false;
@@ -95,8 +92,7 @@ class Calculator {
                         break;
                     case "exit":
                         flag = false;
-                        scanner.close();
-                        flag = false;
+                        this.flag = false;
                         break;
                     default:
                         System.out.println("Чот не та математичекая операция : ");
@@ -109,25 +105,22 @@ class Calculator {
     /**
      * Метод считиывает данные с клавиатуры и возращает их в виде Double
      * @param textAndNumber сообщение выводящиеся в консоль перед считыванием данных с клавиатуры
-     * @param scanner поток для считывания дынных
      * @return возвращаемый параметр в формате Double
      */
-    private Double enterVariable(String textAndNumber, Scanner scanner) {
+    private Double enterVariable(String textAndNumber) {
         if (flag) {
             System.out.println(textAndNumber);
-            while (!scanner.hasNextDouble()) {
-                if (scanner.hasNext("exit")) {
+            while (!this.scanner.hasNextDouble()) {
+                if (this.scanner.hasNext("exit")) {
                     flag = false;
-                    scanner.close();
                     break;
                 } else
                     System.out.println("Это не число. " + textAndNumber);
-                scanner.next();
+                this.scanner.next();
             }
         }
-        return flag ? scanner.nextDouble() : null;
+        return flag ? this.scanner.nextDouble() : null;
     }
-
 
     public static void main(String[] args) {
 
@@ -135,11 +128,11 @@ class Calculator {
 
         do {
             calculator.hello(); // здороваемся
-            Double numberOne = calculator.enterVariable("Введите первое число (дробная часть отделяется запятой): ", new Scanner(System.in)); // вводим первый аргумент
-            Double numberTwo = calculator.enterVariable("Введите второе число (дробная часть отделяется запятой): ", new Scanner(System.in)); // вводим второй аргумент
-            calculator.operationOutRezult(numberOne, numberTwo, new Scanner(System.in)); // вводим операцию и выводим результат вычисления в консоль
+            Double numberOne = calculator.enterVariable("Введите первое число (дробная часть отделяется запятой): "); // вводим первый аргумент
+            Double numberTwo = calculator.enterVariable("Введите второе число (дробная часть отделяется запятой): "); // вводим второй аргумент
+            calculator.operationOutRezult(numberOne, numberTwo); // вводим операцию и выводим результат вычисления в консоль
             calculator.onceMore(); // спрашиваем будем еще чего нибудь считать или нет
-        } while (flag);
+        } while (calculator.flag);
         calculator.bay();
     }
 }
