@@ -1,8 +1,10 @@
 package podolyak;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -47,28 +49,33 @@ class UserSberTest {
 
     @Test
     void findDuplicates1() {
-        List<UserSber> users = UserSber.findDuplicates1(collA1, collB1);
+        List<UserSber> users = Util.findDuplicates1(collA1, collB1);
         assertEquals(4, users.size());
     }
 
     @Test
     void findDuplicates2() {
-        List<UserSber> users = UserSber.findDuplicates2(collA1, collB1);
+        List<UserSber> users = Util.findDuplicates2(collA1, collB1);
         assertEquals(4, users.size());
     }
 
     @Test
     void findDuplicates2Timeout() {
-        long start = System.currentTimeMillis();
-        List<UserSber> users = UserSber.findDuplicates2(collA, collB);
-        long stop = System.currentTimeMillis();
-        assertTrue((stop - start) < 200);
+        assertTimeoutPreemptively(Duration.ofMillis(200),  () -> {
+            List<UserSber> users = Util.findDuplicates2(collA, collB);});
+    }
+
+    @Disabled
+    @Test
+    void findDuplicates1Timeout() {
+        assertTimeoutPreemptively(Duration.ofMillis(200),  () -> {
+            List<UserSber> users = Util.findDuplicates1(collA, collB);});
     }
 
     @Test
     void returnListSize() {
-        List<UserSber> users = UserSber.findDuplicates2(collA1, collB1);
-        List<UserSber> users1 = UserSber.findDuplicates1(collA1, collB1);
+        List<UserSber> users = Util.findDuplicates2(collA1, collB1);
+        List<UserSber> users1 = Util.findDuplicates1(collA1, collB1);
         assertTrue(users.size() == users1.size());
     }
 }
