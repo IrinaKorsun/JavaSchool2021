@@ -19,43 +19,40 @@ public class Account {
     }
 
     private BigDecimal amount;
+
+
+
     public BigDecimal getAmount() {
         try {
             lockObject.lock();
             return amount;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             lockObject.unlock();
         }
 
         return BigDecimal.valueOf(0);
     }
 
-    public void increaseAmount(BigDecimal amount){
+    public void increaseAmount(BigDecimal amount) {
         try {
             lockObject.lock();
-            this.amount.add(amount);
-        }
-        catch (Exception e){
+            this.amount = this.amount.add(amount);
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             lockObject.unlock();
         }
     }
 
-    public void decreaseAmount(BigDecimal amount){
+    public void decreaseAmount(BigDecimal amount) {
         try {
             lockObject.lock();
-            this.amount.subtract(amount);
-        }
-        catch (Exception e){
+            this.amount = this.amount.subtract(amount);
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
             lockObject.unlock();
         }
     }
