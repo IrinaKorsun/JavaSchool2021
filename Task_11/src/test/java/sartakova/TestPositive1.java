@@ -1,6 +1,5 @@
 package sartakova;
 import org.junit.jupiter.api.Test;
-
 import java.util.concurrent.TimeUnit;
 
 
