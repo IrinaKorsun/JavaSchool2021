@@ -1,9 +1,9 @@
 package sartakova;
 
+
 /**
  * Информация о счетах клиентов.
  */
-
 public class Account {
 
     private int accountBalance;

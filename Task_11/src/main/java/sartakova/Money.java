@@ -2,10 +2,10 @@ package sartakova;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 /**
  * Информация о текущем состоянии денежных средств в банке.
  */
+
 
 public class Money {
     private final CopyOnWriteArrayList<Account> bankAccountList = new CopyOnWriteArrayList<>();
