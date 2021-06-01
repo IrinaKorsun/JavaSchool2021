@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 
-
 public class TestNegative2 {
     @Test
     void testMaxSumOn50Accounts() {

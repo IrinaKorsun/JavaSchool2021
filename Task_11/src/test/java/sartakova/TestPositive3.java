@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.TimeUnit;
 
 
-
 public class TestPositive3 {
     @Test
     void testWith70ClientsAnd2Accounts() {

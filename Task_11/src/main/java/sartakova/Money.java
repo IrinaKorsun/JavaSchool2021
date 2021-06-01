@@ -2,7 +2,6 @@ package sartakova;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 /**
  * Информация о текущем состоянии денежных средств в банке.
  */

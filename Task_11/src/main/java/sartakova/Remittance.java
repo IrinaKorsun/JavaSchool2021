@@ -2,7 +2,6 @@ package sartakova;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 public class Remittance implements Runnable{
     private Money money;
     private int totalAmount;
