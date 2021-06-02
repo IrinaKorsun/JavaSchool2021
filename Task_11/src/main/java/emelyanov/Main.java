@@ -27,7 +27,7 @@ public class Main {
             threadPool.execute(new Client(acctNumbers, bank));
         }
         threadPool.shutdown();
-        final boolean done = threadPool.awaitTermination(1, TimeUnit.MINUTES);
+        final boolean done = threadPool.awaitTermination(5, TimeUnit.SECONDS);
         System.out.println("Все ли переводы завершены ? " + done);
     }
 
