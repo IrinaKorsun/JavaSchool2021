@@ -20,7 +20,6 @@ public class Main {
             bank.accountsList.add(account);
         }
         Thread checker = new Thread(new ThreadDaemon(bank.accountsList, initialBalance));
-        bank.accountsList.stream().map(r -> r.getBalance()).reduce(0, Integer::sum);
         checker.setDaemon(true);
         checker.start();
         for (int s = 0; s < client; s++) {
