@@ -1,62 +1,78 @@
 package pelipenko;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static pelipenko.Bank.*;
 import static pelipenko.RandomHelper.getRandomNumberUsingNextDouble;
 import static pelipenko.RandomHelper.getRandomNumberUsingNextInt;
 
-
 public class ClientRunnable implements Runnable {
-    private int fromAccountID;
-    private List<Account> accounts;
+    private Bank bank;
 
-    public ClientRunnable(int fromAccountID, List<Account> accounts) {
-        this.fromAccountID = fromAccountID;
-        this.accounts = accounts;
+    public ClientRunnable(Bank bank) {
+        this.bank = bank;
     }
 
     public void run() {
         while (true) {
-            try {
-                int toAccountID = getRandomNumberUsingNextInt(0, numberOfBills);
-                if (toAccountID == fromAccountID) {
-                    continue;
+            int fromAccountID = getRandomNumberUsingNextInt(0, numberOfAccounts);
+            int toAccountID = getRandomNumberUsingNextInt(0, numberOfAccounts);
+
+            if (toAccountID == fromAccountID) {
+                continue;
+            }
+
+            Account fromAccount = bank.getAccounts().get(fromAccountID);
+//            Account fromAccount = bank.getAccounts().stream()
+//                    .filter((a) -> a.getAccountID() == fromAccountID)
+//                    .findFirst()
+//                    .orElse(null);
+
+            if (fromAccount == null) {
+                continue;
+            }
+
+            Account toAccount = bank.getAccounts().get(toAccountID);
+//            Account toAccount = bank.getAccounts().stream()
+//                    .filter((a) -> a.getAccountID() == toAccountID)
+//                    .findFirst()
+//                    .orElse(null);
+
+            if (toAccount == null) {
+                continue;
+            }
+
+            BigDecimal amount = getRandomNumberUsingNextDouble(0, entryAmount.doubleValue());
+
+            if (amount.compareTo(fromAccount.getAmount()) > 0) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
 
-                BigDecimal amount = getRandomNumberUsingNextDouble(0, maxAmount.doubleValue());
+                continue;
+            }
 
-                Account fromAccount = accounts.stream()
-                        .filter((a) -> a.getAccountID() == fromAccountID)
-                        .findFirst()
-                        .orElse(null);
+            synchronized (fromAccount) {
+                synchronized (toAccount) {
+                    fromAccount.decreaseAmount(amount);
 
-                if (fromAccount == null) {
-                    continue;
-                }
-
-                if (amount.compareTo(fromAccount.getAmount()) <= 0) {
-                    Account toAccount = accounts.stream()
-                            .filter((a) -> a.getAccountID() == toAccountID)
-                            .findFirst()
-                            .orElse(null);
-
-                    if (toAccount == null) {
-                        continue;
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
 
-                    fromAccount.decreaseAmount(amount);
                     toAccount.increaseAmount(amount);
-
-                    Main.consoleLock.lock();
-                    System.out.printf("%s transfered from Account=%d to Account=%d", amount, fromAccountID, toAccountID);
-                    System.out.println();
-                    Main.consoleLock.unlock();
                 }
+            }
 
+            System.out.println(String.format("%s transfered from Account=%d to Account=%d", amount, fromAccountID, toAccountID));
+
+            try {
                 Thread.sleep(1000);
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }

@@ -17,6 +17,7 @@ public class TestBank {
     public void positiveTest2() throws Exception {
         String path = "pelipenko/app1.properties";
         Main.main(new String[]{path});
+        Thread.currentThread().join();
     }
 
     @Test

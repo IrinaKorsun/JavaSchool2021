@@ -1,71 +1,59 @@
 package pelipenko;
 
-
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
 import java.util.Properties;
-
-
-import static pelipenko.RandomHelper.getRandomNumberUsingNextInt;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Bank {
-    public static int numberOfBills;
+    public static int numberOfAccounts;
     public static int numberOfClients;
     public static BigDecimal maxAmount;
+    public static BigDecimal entryAmount;
 
     public Bank(String path) {
         initializeApp(path);
 
-        accounts = new ArrayList<>(numberOfBills);
+        accounts = new CopyOnWriteArrayList<>();
 
-        BigDecimal entryAmount = maxAmount.divide(BigDecimal.valueOf(numberOfBills));
+        entryAmount = maxAmount.divide(BigDecimal.valueOf(numberOfAccounts));
 
-        for (int i = 0; i < numberOfBills; i++) {
+        for (int i = 0; i < numberOfAccounts; i++) {
             accounts.add(new Account(i, entryAmount));
         }
     }
 
-    private static List<Account> accounts;
-    public List<Account> getAccounts() {
+    private CopyOnWriteArrayList<Account> accounts;
+    public CopyOnWriteArrayList<Account> getAccounts() {
         return accounts;
     }
 
-    public BigDecimal getSum() {
+    public ArrayList<Account> getCopyAccounts(){
+        ArrayList<Account> result = new ArrayList<>();
+
+        for (Account account : accounts){
+            Account copy = new Account(account.getAccountID(), account.getAmount());
+            result.add(copy);
+        }
+
+        return result;
+    }
+
+    public BigDecimal getSumAmount(){
         BigDecimal result = BigDecimal.valueOf(0);
-        for (Account a : accounts){
-            a.lockObject.lock();
-        }
 
-        for (Account a : accounts){
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            result = result.add(a.getAmount());
-        }
-
-        for (Account a : accounts){
-            a.lockObject.unlock();
+        for (Account account : accounts){
+            result = result.add(account.getAmount());
         }
 
         return result;
     }
 
     public void runClients() {
-        for (int i = 0; i < numberOfClients; i++) {
-            int fromAccountID = getRandomNumberUsingNextInt(0, numberOfBills);
+        for (int i = 0; i < 2; i++) {
+            Thread clientThread = new Thread(new ClientRunnable(this));
 
-            Thread clientThread = new Thread(new ClientRunnable(fromAccountID, accounts));
-
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             clientThread.start();
         }
     }
@@ -75,7 +63,7 @@ public class Bank {
         try (final InputStream stream = getClass().getClassLoader().getResourceAsStream(path)) {
             properties = new Properties();
             properties.load(stream);
-            numberOfBills = Integer.parseInt(properties.getProperty("bills.number"));
+            numberOfAccounts = Integer.parseInt(properties.getProperty("accounts.number"));
             maxAmount = new BigDecimal(properties.getProperty("total.amount"));
             numberOfClients = Integer.parseInt(properties.getProperty("clients.number"));
         } catch (Exception e) {
