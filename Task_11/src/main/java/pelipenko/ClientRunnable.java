@@ -1,8 +1,10 @@
 package pelipenko;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
-import static pelipenko.Bank.*;
+import static pelipenko.Bank.entryAmount;
+import static pelipenko.Bank.numberOfAccounts;
 import static pelipenko.RandomHelper.getRandomNumberUsingNextDouble;
 import static pelipenko.RandomHelper.getRandomNumberUsingNextInt;
 
@@ -17,54 +19,21 @@ public class ClientRunnable implements Runnable {
         while (true) {
             int fromAccountID = getRandomNumberUsingNextInt(0, numberOfAccounts);
             int toAccountID = getRandomNumberUsingNextInt(0, numberOfAccounts);
-
             if (toAccountID == fromAccountID) {
                 continue;
             }
 
-            Account fromAccount = bank.getAccounts().get(fromAccountID);
-//            Account fromAccount = bank.getAccounts().stream()
-//                    .filter((a) -> a.getAccountID() == fromAccountID)
-//                    .findFirst()
-//                    .orElse(null);
-
-            if (fromAccount == null) {
-                continue;
-            }
-
-            Account toAccount = bank.getAccounts().get(toAccountID);
-//            Account toAccount = bank.getAccounts().stream()
-//                    .filter((a) -> a.getAccountID() == toAccountID)
-//                    .findFirst()
-//                    .orElse(null);
-
-            if (toAccount == null) {
-                continue;
+            if (fromAccountID > toAccountID) {
+                int temp = fromAccountID;
+                fromAccountID = toAccountID;
+                toAccountID = temp;
             }
 
             BigDecimal amount = getRandomNumberUsingNextDouble(0, entryAmount.doubleValue());
-
-            if (amount.compareTo(fromAccount.getAmount()) > 0) {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                continue;
-            }
-
-            synchronized (fromAccount) {
-                synchronized (toAccount) {
-                    fromAccount.decreaseAmount(amount);
-
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    toAccount.increaseAmount(amount);
+            synchronized (bank.getAccounts()[fromAccountID]) {
+                synchronized (bank.getAccounts()[toAccountID]) {
+                    bank.getAccounts()[fromAccountID].decreaseAmount(amount);
+                    bank.getAccounts()[toAccountID].increaseAmount(amount);
                 }
             }
 

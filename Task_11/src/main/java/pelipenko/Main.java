@@ -26,17 +26,10 @@ public class Main {
         Thread DaemonThread = new Thread(() -> {
             while (true) {
                 try {
-//                    BigDecimal sumAmount = BigDecimal.valueOf(0);
-//
-//                    ArrayList<Account> accountsCopy = bank.getCopyAccounts();
-//                    for (Account account : accountsCopy){
-//                        sumAmount = sumAmount.add(account.getAmount());
-//                    }
                     BigDecimal sumAmount =bank.getSumAmount();
                     if(!checkTotalAmount(sumAmount)){
                         throw new RuntimeException("Сумма денег на счетах не равна " + Bank.maxAmount + ". Текущая сумма = " + sumAmount);
                     }
-
                     System.out.println("Sum of amounts = " + sumAmount);
                     sleep(3000);
                 } catch (Exception e) {

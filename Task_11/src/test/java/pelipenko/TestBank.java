@@ -35,7 +35,7 @@ public class TestBank {
 
         thread.start();
         Thread.sleep(5000);
-        Account firstAccount = Main.bank.getAccounts().get(0);
+        Account firstAccount = Main.bank.getAccounts()[0];
         if (firstAccount != null) {
             firstAccount.decreaseAmount(BigDecimal.valueOf(10));
             System.out.println("Amount of 1st account was changed manually");

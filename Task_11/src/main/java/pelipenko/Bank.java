@@ -2,58 +2,45 @@ package pelipenko;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Properties;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Bank {
     public static int numberOfAccounts;
     public static int numberOfClients;
     public static BigDecimal maxAmount;
     public static BigDecimal entryAmount;
+    private Account[] accounts;
 
     public Bank(String path) {
         initializeApp(path);
-
-        accounts = new CopyOnWriteArrayList<>();
-
+        accounts = new Account[numberOfAccounts];
         entryAmount = maxAmount.divide(BigDecimal.valueOf(numberOfAccounts));
-
         for (int i = 0; i < numberOfAccounts; i++) {
-            accounts.add(new Account(i, entryAmount));
+            accounts[i] = new Account(i, entryAmount);
         }
     }
 
-    private CopyOnWriteArrayList<Account> accounts;
-    public CopyOnWriteArrayList<Account> getAccounts() {
+
+    public Account[] getAccounts() {
         return accounts;
     }
 
-    public ArrayList<Account> getCopyAccounts(){
-        ArrayList<Account> result = new ArrayList<>();
 
-        for (Account account : accounts){
-            Account copy = new Account(account.getAccountID(), account.getAmount());
-            result.add(copy);
-        }
-
-        return result;
-    }
-
-    public BigDecimal getSumAmount(){
+    public BigDecimal getSumAmount() {
+        Account[] copyOfAccounts = new Account[accounts.length];
+        System.arraycopy(accounts, 0, copyOfAccounts, 0, accounts.length);
         BigDecimal result = BigDecimal.valueOf(0);
-
-        for (Account account : accounts){
+        for (Account account : copyOfAccounts) {
             result = result.add(account.getAmount());
-        }
 
+        }
         return result;
     }
+
 
     public void runClients() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < numberOfClients; i++) {
             Thread clientThread = new Thread(new ClientRunnable(this));
-
             clientThread.start();
         }
     }
